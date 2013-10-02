@@ -1,0 +1,28 @@
+#!/bin/sh
+################################################################################
+#
+# THIS SCRIPT HANDLES SWITCHING OF IGN/DIS GRAPHICS CARD ON BEFORE SUSPENDING
+# AND SWITCHING IT OFF AFTER RESUMING IN ORDER TO PREVENT HARDWARE FREEZE
+# THAT HAPPENDS IF A GRAPHICS CARD IS SWITCHED OFF DURING SUSPENDING.
+#
+# Script must be placed in the /etc/pm/sleep.d directory and it must be 
+# runnable (-rwxr-xr-x).
+#
+# Copywriting (c) Ondrej Fibich <ondrej.fibich@gmail.com> 2013.
+# 
+# Version 0.1
+#
+################################################################################
+
+case "${1}" in
+    suspend|hibernate)
+    	echo "vgaswitcheroo switch ON"
+    	echo ON > /sys/kernel/debug/vgaswitcheroo/switch || true
+		echo "vgaswitcheroo switch ON done"
+    ;;
+    resume|thaw)
+    	echo "vgaswitcheroo switch OFF"
+        echo OFF > /sys/kernel/debug/vgaswitcheroo/switch || true
+		echo "vgaswitcheroo switch OFF done"
+	;;
+esac

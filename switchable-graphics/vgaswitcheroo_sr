@@ -1,0 +1,22 @@
+#!/bin/sh
+################################################################################
+#
+# THIS SCRIPT HANDLES SWITCHING OF IGN/DIS GRAPHICS CARD ON BEFORE HALTING
+# OR RESTARTING IN ORDER TO PREVENT HARDWARE FREEZE THAT HAPPENDS IF A GRAPHICS 
+# CARD IS SWITCHED OFF DURING HALTING OR RESTARTING.
+#
+# Script must be placed in the /etc/init.d directory and it must be 
+# runnable (-rwxr-xr-x). Script auto activation during system halt or reboot
+# can be achive by creating symlinks of this file to /etc/rc0.d/K10vgaswitcheroo_sr
+# and to /etc/rc6.d/K10vgaswitcheroo_sr
+#
+# Copywriting (c) Ondrej Fibich <ondrej.fibich@gmail.com> 2013.
+# 
+# Version 0.1
+#
+################################################################################
+
+echo "vgaswitcheroo switch ON"
+echo ON > /sys/kernel/debug/vgaswitcheroo/switch || true
+echo "vgaswitcheroo switch ON done"
+
